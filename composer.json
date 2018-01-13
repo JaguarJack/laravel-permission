@@ -2,7 +2,7 @@
 	"name" : "administrator/permission",
 	"authors" : [{
 			"name" : "yanwenwu",
-			"email" : "82664165@qq.com"
+			"email" : "wuyanwen1992@gmail.com"
 		}
 	],
 	"description" : "permission control of laravel",
