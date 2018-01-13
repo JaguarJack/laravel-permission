@@ -3,7 +3,7 @@
 namespace Lizyu\Permission;
 
 use Illuminate\Support\ServiceProvider;
-use Lizyu\Permission\Commands\LizPermissionCommand;
+use Lizyu\Permission\Commands\LizRoleCommand;
 use Lizyu\Permission\Contracts\PermissionContracts as Permission;
 use Lizyu\Permission\Contracts\RoleContracts as Role;
 
@@ -65,7 +65,7 @@ class PermissionServiceProvider extends ServiceProvider
      */
     protected function reigsterCommand()
     {
-        $this->commands(LizPermissionCommand::class);
+        $this->commands(LizRoleCommand::class);
     }
     
     /**

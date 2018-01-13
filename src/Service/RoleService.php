@@ -73,7 +73,7 @@ class RoleService implements Role
      * {@inheritDoc}
      * @see \Lizyu\Permission\Contracts\RoleContracts::findByName()
      */
-    public function findByName($name)
+    public function findByName(string $name)
     {
         return $this->role->where('name', '=', $name)->first();
     }
