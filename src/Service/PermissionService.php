@@ -103,16 +103,22 @@ class PermissionService implements Permission, \ArrayAccess
             $owner = $this->findByName($permission)->role->first()->user->first();
         }
         
+        if ( !$owner ) return false;
+        
         return $user->name == $owner->name;
     }
     
     
     public function offsetGet($offset)
     {
-        return $this->permission;
+        return $this->$offset;
     }
     
-    public function offsetExists($offset){}
+    public function offsetExists($offset)
+    {
+        return isset($this->$offset) ? true : false;
+    }
+    
     public function offsetSet($offset, $value){}
     public function offsetUnset($offset){}
     

@@ -6,8 +6,6 @@ use Illuminate\Support\ServiceProvider;
 use Lizyu\Permission\Commands\LizPermissionCommand;
 use Lizyu\Permission\Contracts\PermissionContracts as Permission;
 use Lizyu\Permission\Contracts\RoleContracts as Role;
-use Lizyu\Permission\Service\PermissionService;
-use Lizyu\Permission\Service\RoleService;
 
 class PermissionServiceProvider extends ServiceProvider
 {
@@ -29,9 +27,24 @@ class PermissionServiceProvider extends ServiceProvider
     public function register()
     {
         //
+        $this->publishConfig();
         $this->reigsterCommand();
         $this->registerMigration();
         $this->bindService();
+    }
+    
+    /**
+     * @description:register config
+     * @author: wuyanwen <wuyanwen1992@gmail.com>
+     * @date:2018年1月13日
+     */
+    protected function publishConfig()
+    {
+        $config = __DIR__  . '/../config/lizyu.php';
+        
+        $config_path = $this->app->configPath() . '/lizyu.php';
+        
+        $this->publishes([ $config => $config_path ], 'lizyu.config');
     }
     
     /**
@@ -41,8 +54,8 @@ class PermissionServiceProvider extends ServiceProvider
      */
     protected function bindService()
     {
-        $this->app->bind(Permission::class, PermissionService::class);
-        $this->app->bind(Role::class, RoleService::class);
+        $this->app->bind(Permission::class, config('lizyu.permission'));
+        $this->app->bind(Role::class, config('lizyu.role'));
     }
     
     /**
