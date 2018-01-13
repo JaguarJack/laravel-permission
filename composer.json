@@ -1,0 +1,22 @@
+{
+	"name" : "administrator/permission",
+	"authors" : [{
+			"name" : "yanwenwu",
+			"email" : "82664165@qq.com"
+		}
+	],
+	"description" : "permission control of laravel",
+	"homepage" : "https://www.njphper.com",
+	"license" : "MIT",
+	"minimum-stability" : "dev",
+	"autoload" : {
+		"psr-4" : {
+			"Lizyu\\Permission\\" : "src/"
+		}
+	},
+	"keywords" : [
+		"auth",
+		"permission",
+		"laravel"
+	]
+}
