@@ -2,7 +2,7 @@
 
 return [
     
-    'role'       => Lizyu\Permission\Service\RoleService::class,
+    'role'       => Lizyu\Permission\Repository\RoleRepository::class,
     
-    'permission' => Lizyu\Permission\Service\PermissionService::class,
+    'permission' => Lizyu\Permission\Repository\PermissionRepository::class,
 ];

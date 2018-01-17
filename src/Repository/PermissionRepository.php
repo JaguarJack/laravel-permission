@@ -1,11 +1,11 @@
 <?php
 
-namespace Lizyu\Permission\Service;
+namespace Lizyu\Permission\Repository;
 
 use Lizyu\Permission\Models\Permissions;
 use Lizyu\Permission\Contracts\PermissionContracts as Permission;
 
-class PermissionService implements Permission, \ArrayAccess
+class PermissionRepository implements Permission, \ArrayAccess
 {
     protected $permission;
     

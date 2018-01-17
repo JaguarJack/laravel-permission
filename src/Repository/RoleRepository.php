@@ -1,11 +1,11 @@
 <?php
 
-namespace Lizyu\Permission\Service;
+namespace Lizyu\Permission\Repository;
 
 use Lizyu\Permission\Models\Roles;
 use Lizyu\Permission\Contracts\RoleContracts as Role;
 
-class RoleService implements Role
+class RoleRepository implements Role
 {
     protected $role;
     
