@@ -19,7 +19,7 @@ class Roles extends Model
     */
    public function permissions()
    {
-       $this->belongsToMany(Permissions::class, 'role_has_permissions');
+       return $this->belongsToMany(Permissions::class, 'role_has_permissions');
    }
    
    /**
@@ -29,6 +29,6 @@ class Roles extends Model
     */
    public function users()
    {
-       $this->belongsToMany(config('providers.' . config('guards.web.provider') . '.model'), 'user_has_roles');
+       return $this->belongsToMany(config('auth.providers.' . config('auth.guards.admin.provider') . '.model'), 'user_has_roles');
    }
 }

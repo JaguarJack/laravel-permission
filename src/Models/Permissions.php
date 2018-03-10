@@ -22,7 +22,7 @@ class Permissions extends Model
      */
     public function permissions()
     {
-        $this->belongsToMany(Roles::class, 'role_has_permissions');
+        return $this->belongsToMany(Roles::class, 'role_has_permissions');
     }
     
 }

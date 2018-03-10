@@ -14,10 +14,11 @@ class CreatePermissionsTable extends Migration
     public function up()
     {
         Schema::create('permissions', function (Blueprint $table) {
-            $table->increments('id');
+            $table->smallIncrements('id');
+            $table->smallInteger('pid');
             $table->string('name');
-            $table->string('controller');
-            $table->string('function');
+            $table->string('url');
+            $table->string('behavior');
             $table->smallInteger('weight');
             $table->timestamps();
         });
@@ -25,6 +26,7 @@ class CreatePermissionsTable extends Migration
         Schema::create('roles', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->string('description');
             $table->timestamps();
         });
             

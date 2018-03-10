@@ -6,6 +6,10 @@ use Illuminate\Support\ServiceProvider;
 use Lizyu\Permission\Commands\LizRoleCommand;
 use Lizyu\Permission\Contracts\PermissionContracts as Permission;
 use Lizyu\Permission\Contracts\RoleContracts as Role;
+use Lizyu\Permission\Repository\RoleRepository;
+use Lizyu\Permission\Repository\PermissionRepository;
+use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Contracts\Auth\Access\Gate;
 
 class PermissionServiceProvider extends ServiceProvider
 {
@@ -14,9 +18,13 @@ class PermissionServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(Gate $gate)
     {
         //
+        $this->reigsterCommand();
+        $this->registerMigration();
+        $this->bindRespository();
+        $this->registerGate($gate);
     }
 
     /**
@@ -28,9 +36,6 @@ class PermissionServiceProvider extends ServiceProvider
     {
         //
         $this->publishConfig();
-        $this->reigsterCommand();
-        $this->registerMigration();
-        $this->bindService();
     }
     
     /**
@@ -52,10 +57,10 @@ class PermissionServiceProvider extends ServiceProvider
      * @author: wuyanwen <wuyanwen1992@gmail.com>
      * @date:2018年1月13日
      */
-    protected function bindService()
+    protected function bindRespository()
     {
-        $this->app->bind(Permission::class, config('lizyu.permission'));
-        $this->app->bind(Role::class, config('lizyu.role'));
+        $this->app->bind(Permission::class, PermissionRepository::class);
+        $this->app->bind(Role::class, RoleRepository::class);
     }
     
     /**
@@ -80,5 +85,19 @@ class PermissionServiceProvider extends ServiceProvider
         $migration = sprintf($this->app->databasePath() . '/migrations/%s_create_permissions_table.php', date('Y_m_d_His', time()));
         
         $this->publishes([ $stub=> $migration ], 'lizyu.migrations');
+    }
+    
+    /**
+     * @description:注册授权策略
+     * @author: wuyanwen <wuyanwen1992@gmail.com>
+     * @date:2018年3月10日
+     * @param Gate $gate
+     * @return \Illuminate\Contracts\Auth\Access\Gate
+     */
+    protected function  registerGate(Gate $gate)
+    {
+        return $gate->before(function(Authenticatable $user, string $permission){
+                    return app(Permission::class)->PermissionBeOwned($user, $permission);
+               });
     }
 }

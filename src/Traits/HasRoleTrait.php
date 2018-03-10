@@ -13,7 +13,7 @@ trait HasRoleTrait
      */
     public function roles()
     {
-        $this->belongsToMany(Roles::class, 'user_has_roles');
+        return $this->belongsToMany(Roles::class, 'user_has_roles');
     }
     
     /**
@@ -51,10 +51,5 @@ trait HasRoleTrait
     public function deleteRolesOfUser($roles = null)
     {
         return $this->roles()->detach($roles);
-    }
-    
-    public function hasRole($role)
-    {
-        
     }
 }
