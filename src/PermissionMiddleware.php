@@ -3,6 +3,7 @@
 namespace Lizyu\Permission;
 
 use Closure;
+use Lizyu\Permission\Exceptions\UnauthorizedException;
 
 class PermissionMiddleware
 {
@@ -16,17 +17,14 @@ class PermissionMiddleware
     public function handle($request, Closure $next)
     {
         if ( auth()->guest() ) {
-            
-            $msg = ['code' => 10001, 'msg' => '未登录'];
-            
-            return $request->ajax() ? response()->json($msg) : redirect('/login');
+            throw UnauthorizedException::permissionForbidden('Not Login, Please to Login Page');
         }
         
         //非超级用户需要验证权限
         $user = auth()->user();
-        if ( $user->is_super != 1 ) {
+        if ( !isset($user->is_super) || $user->is_super != 1 ) {
             if (!$user->can($this->handleRoute($request->route()->getAction()))) {
-               // return  response()->json(['msg' => '权限不足']);
+                throw UnauthorizedException::permissionForbidden('Permission Forbidden');
             }
         }
         
