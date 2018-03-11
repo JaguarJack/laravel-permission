@@ -24,7 +24,7 @@ class PermissionMiddleware
         $user = auth()->user();
         if ( !isset($user->is_super) || $user->is_super != 1 ) {
             if (!$user->can($this->handleRoute($request->route()->getAction()))) {
-               // throw UnauthorizedException::permissionForbidden('Permission Forbidden');
+                throw UnauthorizedException::permissionForbidden('Permission Forbidden');
             }
         }
         
