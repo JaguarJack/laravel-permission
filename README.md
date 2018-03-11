@@ -9,4 +9,5 @@ composer require "lizyu/permission"
 2. 发布配置文件 php artisan vendor:publish --provider="Lizyu\Permission\PermissionServiceProvider" --tag="lizyu.config"
 3. 发布migrate文件 php artisan vendor:publish --provider="Lizyu\Permission\PermissionServiceProvider" --tag="lizyu.migrations"
 4. 创建权限表 php artisan migration
-5. 填充数据， 配置了基本数据，默认就是使用laravel自带的User表， 所以填充数据。
+5. 填充数据， 配置了基本数据，默认就是使用laravel自带的User表。
+6. 这个包设计很简单， 基本就是为lizyu/admin服务的， 所以耦合很高, 如果你有实际需求， 需要修改包， 这个包不具有普适性。
