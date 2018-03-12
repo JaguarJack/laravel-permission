@@ -121,7 +121,7 @@ class PermissionRepository implements Permission, \ArrayAccess
         }
         
         if (is_string($permission)) {
-            return $this->findUserIdsByBehavior($permission)->contains($user->id) ? true : false;
+            return $this->findUserIdsByBehavior($permission)->contains('user_id', $user->id) ? true : false;
         }
         
         return false;
