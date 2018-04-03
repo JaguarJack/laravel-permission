@@ -21,10 +21,6 @@ class PermissionServiceProvider extends ServiceProvider
     public function boot(Gate $gate)
     {
         //
-        $this->reigsterCommand();
-        $this->registerMigration();
-        $this->bindRespository();
-        $this->registerGate($gate);
     }
 
     /**
@@ -35,6 +31,10 @@ class PermissionServiceProvider extends ServiceProvider
     public function register()
     {
         //
+        $this->reigsterCommand();
+        $this->registerMigration();
+        $this->bindContract();
+        $this->registerGate($gate);
         $this->publishConfig();
     }
     
@@ -57,7 +57,7 @@ class PermissionServiceProvider extends ServiceProvider
      * @author: wuyanwen <wuyanwen1992@gmail.com>
      * @date:2018年1月13日
      */
-    protected function bindRespository()
+    protected function bindContract()
     {
         $this->app->bind(PermissionContract::class, Permissions::class);
         $this->app->bind(RoleContract::class, Roles::class);
@@ -97,7 +97,7 @@ class PermissionServiceProvider extends ServiceProvider
     protected function  registerGate(Gate $gate)
     {
         return $gate->before(function(Authenticatable $user, string $permission){
-                    return app(Permission::class)->PermissionBeOwned($user, $permission);
+                    return app(PermissionContract::class)->PermissionBeOwned($user, $permission);
                });
     }
 }
