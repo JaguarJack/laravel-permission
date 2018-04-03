@@ -143,8 +143,7 @@ class Permissions extends Model implements PermissionContract
      */
     public function findUserIdsByBehavior($behavior)
     {
-        return $this->permission
-                    ->where('behavior', $behavior)
+        return $this->where('behavior', $behavior)
                     ->leftjoin('role_has_permissions', 'permissions.id', '=', 'role_has_permissions.permissions_id')
                     ->leftjoin('user_has_roles', 'role_has_permissions.roles_id', '=', 'user_has_roles.roles_id')
                     ->select('user_has_roles.user_id')
