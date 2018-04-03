@@ -122,7 +122,7 @@ class Permissions extends Model implements PermissionContract
      * @param unknown $permission
      * @return boolean
      */
-    public function PermissionBeOwned($user, int $permission_id)
+    public function PermissionBeOwned($user, $permission)
     {
         if (is_numeric($permission)) {
             $owner = $this->findById($permission)->role->first()->user->first();
