@@ -18,7 +18,7 @@ class PermissionServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot(Gate $gate)
+    public function boot()
     {
         //
     }
@@ -34,7 +34,7 @@ class PermissionServiceProvider extends ServiceProvider
         $this->reigsterCommand();
         $this->registerMigration();
         $this->bindContract();
-        $this->registerGate($gate);
+        $this->registerGate();
         $this->publishConfig();
     }
     
@@ -94,9 +94,9 @@ class PermissionServiceProvider extends ServiceProvider
      * @param Gate $gate
      * @return \Illuminate\Contracts\Auth\Access\Gate
      */
-    protected function  registerGate(Gate $gate)
+    protected function  registerGate()
     {
-        return $gate->before(function(Authenticatable $user, string $permission){
+        return $this->app->make(Gate::class)->before(function(Authenticatable $user, string $permission){
                     return app(PermissionContract::class)->PermissionBeOwned($user, $permission);
                });
     }
