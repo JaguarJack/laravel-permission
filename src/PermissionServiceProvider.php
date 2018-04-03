@@ -4,10 +4,10 @@ namespace Lizyu\Permission;
 
 use Illuminate\Support\ServiceProvider;
 use Lizyu\Permission\Commands\LizRoleCommand;
-use Lizyu\Permission\Contracts\PermissionContracts as Permission;
-use Lizyu\Permission\Contracts\RoleContracts as Role;
-use Lizyu\Permission\Repository\RoleRepository;
-use Lizyu\Permission\Repository\PermissionRepository;
+use Lizyu\Permission\Contracts\PermissionContract;
+use Lizyu\Permission\Contracts\RoleContract;
+use Lizyu\Permission\Models\Permissions;
+use Lizyu\Permission\Models\Roles;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Access\Gate;
 
@@ -59,8 +59,8 @@ class PermissionServiceProvider extends ServiceProvider
      */
     protected function bindRespository()
     {
-        $this->app->bind(Permission::class, PermissionRepository::class);
-        $this->app->bind(Role::class, RoleRepository::class);
+        $this->app->bind(PermissionContract::class, Permissions::class);
+        $this->app->bind(RoleContract::class, Roles::class);
     }
     
     /**
