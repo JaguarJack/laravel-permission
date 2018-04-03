@@ -159,7 +159,7 @@ class Permissions extends Model implements PermissionContract
      */
     public function deletePermissionOfRole(int $permission_id)
     {
-        return $this->findById($permission)->permissions()->detach();
+        return $this->findById($permission_id)->permissions()->detach();
     }
     
     
