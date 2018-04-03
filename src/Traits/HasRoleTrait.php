@@ -34,7 +34,7 @@ trait HasRoleTrait
      * @param unknown $roles
      * @return unknown
      */
-    public function storeRolesOfUser($roles)
+    public function storeRolesOfUser(array $role_ids = null)
     {
         $this->deleteRolesOfUser();
         
@@ -48,7 +48,7 @@ trait HasRoleTrait
      * @param unknown $roles
      * @return unknown
      */
-    public function deleteRolesOfUser($roles = null)
+    public function deleteRolesOfUser(array $role_ids = null)
     {
         return $this->roles()->detach($roles);
     }

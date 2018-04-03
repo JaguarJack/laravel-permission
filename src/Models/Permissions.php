@@ -122,7 +122,7 @@ class Permissions extends Model implements PermissionContract
      * @param unknown $permission
      * @return boolean
      */
-    public function PermissionBeOwned($user, $permission)
+    public function PermissionBeOwned($user, int $permission_id)
     {
         if (is_numeric($permission)) {
             $owner = $this->findById($permission)->role->first()->user->first();
@@ -141,7 +141,7 @@ class Permissions extends Model implements PermissionContract
      * @date:2018年3月10日
      * @param string $behavior
      */
-    public function findUserIdsByBehavior($behavior)
+    public function findUserIdsByBehavior(string $behavior)
     {
         return $this->where('behavior', $behavior)
                     ->leftjoin('role_has_permissions', 'permissions.id', '=', 'role_has_permissions.permissions_id')
@@ -157,7 +157,7 @@ class Permissions extends Model implements PermissionContract
      * @date:2018年3月10日
      * @param unknown $permission
      */
-    public function deletePermissionOfRole($permission)
+    public function deletePermissionOfRole(int $permission_id)
     {
         return $this->findById($permission)->permissions()->detach();
     }

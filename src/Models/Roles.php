@@ -124,9 +124,9 @@ class Roles extends Model implements RoleContract
     * @param unknown $permission
     * @return unknown
     */
-   public function deletePermissionsOfRole(int $role_id, $permissions = null)
+   public function deletePermissionsOfRole(int $role_id, array $permission_ids = null)
    {
-       return $this->findById($role_id)->permissions()->detach($permissions);
+       return $this->findById($role_id)->permissions()->detach($permission_ids);
    }
    
    /**
@@ -137,11 +137,11 @@ class Roles extends Model implements RoleContract
     * @param unknown $permission
     * @return unknown
     */
-   public function storePermissionsOfRole(int $role_id, $permissions = null)
+   public function storePermissionsOfRole(int $role_id, array $permission_ids = null)
    {
        $this->deletePermissionsOfRole($role_id, null);
        
-       return $this->findById($role_id)->permissions()->attach($permissions);
+       return $this->findById($role_id)->permissions()->attach($permission_ids);
    }
    
    /**
