@@ -74,7 +74,7 @@ class Roles extends Model implements RoleContract
     */
    public function updateBy(array $role, int $role_id)
    {
-       $roleModel = $this->findById($role['id']);
+       $roleModel = $this->findById($role_id);
        
        foreach ($role as $attr => $value) {
            if ($value) $roleModel->$attr = $value;
