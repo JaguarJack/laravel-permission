@@ -16,10 +16,6 @@ class PermissionMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if ( auth()->guest() ) {
-            throw UnauthorizedException::permissionForbidden('Not Login, Please to Login Page');
-        }
-        
         //非超级用户需要验证权限
         $user = auth()->user();
         if ( !isset($user->is_super) || $user->is_super != 1 ) {
