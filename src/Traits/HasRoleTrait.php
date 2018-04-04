@@ -38,7 +38,7 @@ trait HasRoleTrait
     {
         $this->deleteRolesOfUser();
         
-        return $this->roles()->attach($roles);
+        return $this->roles()->attach($role_ids);
     }
     
     /**
@@ -50,6 +50,6 @@ trait HasRoleTrait
      */
     public function deleteRolesOfUser(array $role_ids = null)
     {
-        return $this->roles()->detach($roles);
+        return $this->roles()->detach($role_ids);
     }
 }
