@@ -49,3 +49,5 @@ public function deleteRolesOfUser(array $role_ids = null);
 public function storeRolesOfUser(array $role_ids = null)；;
 ##### 获取用户的权限列表
 public function getUserOfPermissions(int $user_id);
+### 权限验证通过中间件
+异常需要在app\Exception 里面捕获， 返回码为403
