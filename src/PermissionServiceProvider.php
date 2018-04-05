@@ -35,21 +35,6 @@ class PermissionServiceProvider extends ServiceProvider
         $this->registerMigration();
         $this->bindContract();
         $this->registerGate();
-        $this->publishConfig();
-    }
-    
-    /**
-     * @description:register config
-     * @author: wuyanwen <wuyanwen1992@gmail.com>
-     * @date:2018年1月13日
-     */
-    protected function publishConfig()
-    {
-        $config = __DIR__  . '/../config/lizyu.php';
-        
-        $config_path = $this->app->configPath() . '/lizyu.php';
-        
-        $this->publishes([ $config => $config_path ], 'lizyu.config');
     }
     
     /**
@@ -84,7 +69,7 @@ class PermissionServiceProvider extends ServiceProvider
         
         $migration = sprintf($this->app->databasePath() . '/migrations/%s_create_permissions_table.php', date('Y_m_d_His', time()));
         
-        $this->publishes([ $stub=> $migration ], 'lizyu.migrations');
+        $this->publishes([ $stub=> $migration ], 'permission.migrations');
     }
     
     /**
