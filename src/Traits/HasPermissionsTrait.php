@@ -12,8 +12,8 @@ trait HasPermissionsTrait
      */
     public function getUserOfPermissions(int $user_id)
     {
-        return $this->where('users.id', $user_id)
-                    ->join('user_has_roles', 'users.id', '=', 'user_has_roles.user_id')
+        return $this->where($this->table . '.id', $user_id)
+                    ->join('user_has_roles', $this->table . '.id', '=', 'user_has_roles.user_id')
                     ->join('role_has_permissions', 'user_has_roles.roles_id', '=', 'role_has_permissions.roles_id')
                     ->join('permissions', 'permissions.id', '=', 'role_has_permissions.permissions_id')
                     ->select('permissions.*')
